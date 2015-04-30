@@ -1,7 +1,7 @@
 "use strict";
 
 var express = require('express');
-var PORT = process.env.PORT || 3333;
+var PORT = process.env.PORT || 3334;
 var RoutesConfig = require('./config/routes.config');
 var DbConfig = require('./config/db.config');
 var Routes = require('./routes/routes');

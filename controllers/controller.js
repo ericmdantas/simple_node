@@ -6,7 +6,7 @@ function Controller(){}
 
 Controller.cria = function(req, res) {
     var _onSuccess = function(info) {
-        res.status(201).json(info);
+        res.status(201).end();
     }
 
     var _onError = function(error) {
