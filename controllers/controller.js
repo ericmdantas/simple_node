@@ -5,20 +5,11 @@ var dao = require('../dao/dao');
 function Controller(){}
 
 Controller.cria = function(req, res) {
-    var _onSuccess = function(info) {
-        res.status(201).end();
-    }
-
-    var _onError = function(error) {
-        res.status(400).json(error);
-    }
-
     var _novaInfo = req.body;
 
-    dao
-        .cria(_novaInfo)
-        .then(_onSuccess)
-        .catch(_onError);
+    dao.cria(_novaInfo);
+
+    res.end();
 }
 
 module.exports = Controller;

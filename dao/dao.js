@@ -8,7 +8,9 @@ infoSchema.statics.cria = function(info) {
 
     return new Promise(function(resolve, reject)
     {
-        InfoModel.collection.insert(info, function(err, infoCreated)
+        var _opt = {writeConcern: 0};
+
+        InfoModel.collection.insert(info, _opt, function(err, infoCreated)
         {
             err ? reject(err)
                 : resolve(infoCreated);

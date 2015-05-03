@@ -6,11 +6,21 @@ var RoutesConfig = require('./config/routes.config');
 var DbConfig = require('./config/db.config');
 var Routes = require('./routes/routes');
 var app = express();
+var cluster = require('cluster');
+var numCpus = require('os').cpus().length;
 
-DbConfig.init();
-RoutesConfig.init(app);
-Routes.init(app, express.Router());
+if (cluster.isMaster) {
+    for (var i = 0; i < numCpus; i++)
+    {
+        cluster.fork();
+    }
+}
+else {
+     DbConfig.init();
+     RoutesConfig.init(app);
+     Routes.init(app, express.Router());
 
-app.listen(PORT);
+    app.listen(PORT);
 
-console.log('Rodando em: %s', PORT);
+    console.log('Rodando em: %s', PORT);
+}
